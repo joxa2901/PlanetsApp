@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, changeDetectionStrategy } from '@angular/core';
 import { Planet } from '../../models/planet';
 import { Observable, switchMap } from 'rxjs';
 import { PlanetService } from '../../services/planet.service';
@@ -7,6 +7,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 @Component({
     selector: 'pl-planet-details',
     templateUrl: './planet-details.component.html',
+    changeDetectionStrategy: changeDetectionStrategy.OnPush
 })
 export class PlanetDetailsComponent implements OnInit {
     planet$!: Observable<Planet>;
@@ -68,3 +69,4 @@ export class PlanetDetailsComponent implements OnInit {
             });
     }
 }
+
