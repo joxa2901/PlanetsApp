@@ -1,0 +1,55 @@
+@use "../standard/colors.scss";
+
+@mixin color-modif() {
+    $colors: (
+        primary: colors.$primary,
+        secondaryBtn: colors.$btn-icon-background,
+        plain: colors.$plain,
+        placeholder: colors.$placeholder,
+        primary-text: colors.$primary-text,
+        secondaryText: colors.$secondary-text,
+        transparent: transparent,
+    );
+
+    @each $key, $val in $colors {
+        &--#{"" + $key} {
+            @content ($val);
+        }
+    }
+}
+
+@mixin icon($code: "", $width, $height) {
+    -webkit-mask-image: url("../../assets/icons/#{$code}");
+    -webkit-mask-repeat: no-repeat;
+    width: $width;
+    height: $height;
+    -webkit-mask-size: $width $height;
+    cursor: pointer;
+
+    & > :first-child {
+        width: $width;
+        height: $height;
+    }
+}
+
+@mixin width-modif() {
+    $width: (
+        15: 15%,
+        40: 40%,
+        80: 80%,
+    );
+
+    @each $key, $val in $width {
+        &--#{"" + $key} {
+            @content ($val);
+        }
+    }
+}
+
+@mixin font-overflow($clamp: 2) {
+    display: -webkit-box;
+    -webkit-line-clamp: $clamp;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    word-break: break-word;
+}

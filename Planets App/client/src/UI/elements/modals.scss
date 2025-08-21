@@ -1,0 +1,75 @@
+@use "../standard/colors.scss";
+
+.modal-background {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: colors.$modal-background;
+}
+
+.modal {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    height: 60%;
+    background-color: colors.$plain;
+    border-radius: 0.8rem;
+    padding: 2.8rem 0;
+    &__header {
+        font-family: "SemiBold";
+        font-size: 2rem;
+        line-height: 2.8rem;
+        margin-bottom: 2rem;
+        padding: 0 2.8rem;
+    }
+
+    &__content {
+        height: 100%;
+        overflow-y: auto;
+        margin-bottom: 2rem;
+        padding: 0 2.8rem;
+
+        &--centered {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+        }
+    }
+
+    &__footer {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 2rem;
+        margin-top: auto;
+        padding: 0 2.8rem;
+    }
+
+    &--confirmation {
+        width: 32%;
+        height: 30%;
+    }
+}
+
+.confirmation-headline-label {
+    font-family: "SemiBold";
+    font-size: 2rem;
+    line-height: 2.8rem;
+}
+
+.confirmation-alert-label {
+    font-family: "Regular";
+    font-size: 1.4rem;
+    line-height: 2rem;
+    &--semiBold {
+        font-family: "SemiBold";
+    }
+}

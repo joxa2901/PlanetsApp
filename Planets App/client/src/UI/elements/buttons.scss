@@ -1,0 +1,47 @@
+@use "../mixins/mixins";
+@use "../standard/colors.scss";
+
+.btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.4rem;
+    width: 12rem;
+    height: 4rem;
+
+    @include mixins.color-modif() using($color) {
+        background-color: $color;
+
+        &:hover {
+            background-color: lighten($color, 10%);
+        }
+    }
+}
+
+.btn-label {
+    font-size: 1.6rem;
+    line-height: 2rem;
+
+    @include mixins.color-modif() using($color) {
+        color: $color;
+    }
+}
+
+.btn-icon-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.8rem;
+    height: 2.8rem;
+    border-radius: 0.4rem;
+    background-color: transparent;
+    &--active {
+        background-color: colors.$btn-icon-background;
+    }
+}
+
+.divider {
+    width: 0.1rem;
+    height: 2.8rem;
+    background-color: colors.$divider;
+}

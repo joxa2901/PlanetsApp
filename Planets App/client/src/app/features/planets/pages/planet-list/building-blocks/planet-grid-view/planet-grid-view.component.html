@@ -1,0 +1,47 @@
+<div class="planet-grid-card__header">
+    <img
+        *ngIf="planet.imageUrl; else placeholder"
+        [src]="planet.imageUrl"
+        [alt]="planet.planetName + ' planet'"
+        loading="lazy"
+    />
+    <ng-template #placeholder>
+        <div class="planet-placeholder planet-placeholder--grid"></div>
+    </ng-template>
+    <div class="data-primary-label data-primary-label--main-details">
+        {{ planet.planetName }}
+    </div>
+</div>
+<div class="planet-grid-card__description">
+    {{ planet.description }}
+</div>
+<div class="planet-grid-card__footer">
+    <div class="data-pair-wrapper">
+        <div class="data-pair">
+            <span class="data-pair__primary">
+                {{ planet.planetColor }}
+            </span>
+            <span class="data-pair__secondary"> Color </span>
+        </div>
+        <div class="data-pair">
+            <span class="data-pair__primary">
+                {{ planet.distInMillionsKM.fromSun }}
+            </span>
+            <span class="data-pair__secondary"> Dist. from Sun </span>
+        </div>
+    </div>
+    <div class="data-pair-wrapper">
+        <div class="data-pair">
+            <span class="data-pair__primary">
+                {{ planet.planetRadiusKM }}
+            </span>
+            <span class="data-pair__secondary"> Radius in km </span>
+        </div>
+        <div class="data-pair">
+            <span class="data-pair__primary">
+                {{ planet.distInMillionsKM.fromEarth }}
+            </span>
+            <span class="data-pair__secondary"> Dist. from Earth </span>
+        </div>
+    </div>
+</div>

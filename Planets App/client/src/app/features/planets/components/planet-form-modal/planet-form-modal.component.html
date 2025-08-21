@@ -1,0 +1,141 @@
+<div class="modal-background" *ngIf="!isConfirmationModalVisible">
+    <div class="modal">
+        <div class="modal__header">
+            {{ mode === "create" ? "New Planet" : "Edit Planet" }}
+        </div>
+        <div class="modal__content">
+            <form class="form" [formGroup]="planetForm" novalidate>
+                <div class="form-pair form-pair__image">
+                    <label
+                        for="imageUrl"
+                        class="form-label form-label--placeholder"
+                        >Photo</label
+                    >
+                    <button
+                        class="btn btn--primary btn-label--plain relative"
+                        (click)="fileInput.click()"
+                    >
+                        Browse
+                        <input
+                            #fileInput
+                            class="hidden"
+                            type="file"
+                            (change)="onFileSelected($event)"
+                            accept="image/*"
+                        />
+                    </button>
+                </div>
+                <div class="form-pair relative">
+                    <label
+                        for="planetName"
+                        class="form-label form-label--placeholder"
+                        >Planet Name:
+                    </label>
+                    <input
+                        type="text"
+                        formControlName="planetName"
+                        class="col"
+                        [class.required]="planetForm.controls['planetName'].errors?.['required'] && planetForm.touched"
+                    />
+                    <small
+                        *ngIf="planetForm.invalid && planetForm.touched"
+                        class="error"
+                    >
+                        <span
+                            *ngIf="planetForm.controls['planetName'].errors?.['required']"
+                            >Field is Required</span
+                        >
+                    </small>
+                </div>
+                <div class="form-pair">
+                    <label
+                        for="description"
+                        class="form-label form-label--placeholder"
+                        >Description</label
+                    >
+                    <textarea
+                        formControlName="description"
+                        class="col"
+                        [rows]="5"
+                    ></textarea>
+                </div>
+                <div class="form-pair">
+                    <label
+                        for="planetColor"
+                        class="form-label form-label--placeholder"
+                        >Radius in km</label
+                    >
+                    <input
+                        type="number"
+                        class="col-2"
+                        formControlName="planetRadiusKM"
+                    />
+                </div>
+                <div class="form-pair">
+                    <label
+                        for="planetColor"
+                        class="form-label form-label--placeholder"
+                        >Color</label
+                    >
+                    <input
+                        type="text"
+                        class="col-2"
+                        formControlName="planetColor"
+                    />
+                </div>
+                <div class="form-pair">
+                    <label
+                        for="planetColor"
+                        class="form-label form-label--placeholder"
+                        >Dist. from Sun</label
+                    >
+                    <input
+                        type="number"
+                        class="col-2"
+                        formControlName="distFromSun"
+                    />
+                </div>
+                <div class="form-pair">
+                    <label
+                        for="planetColor"
+                        class="form-label form-label--placeholder"
+                        >Dist. from Earth</label
+                    >
+                    <input
+                        type="number"
+                        class="col-2"
+                        formControlName="distFromEarth"
+                    />
+                </div>
+            </form>
+        </div>
+        <div class="modal__footer">
+            <button
+                class="btn btn--primary btn-label--plain"
+                [disabled]="!planetForm.valid"
+                (click)="isConfirmationModalVisible = true"
+            >
+                {{ mode === "create" ? "Create" : "Confirm" }}
+            </button>
+            <button
+                class="btn btn--transparent btn-label--placeholder"
+                (click)="onCancel()"
+            >
+                Cancel
+            </button>
+        </div>
+    </div>
+</div>
+
+<pl-confirmation-modal
+    *ngIf="isConfirmationModalVisible"
+    [action]="mode === 'create' ? 'create' : 'edit'"
+    [actionName]="mode === 'create' ? 'creating' : 'editing'"
+    [name]="
+        mode === 'create'
+            ? planetForm.get('planetName')?.value
+            : planet.planetName
+    "
+    (confirmationEmitter)="onSubmit()"
+    (cancelEmitter)="onConfirmationCancel()"
+></pl-confirmation-modal>

@@ -1,0 +1,104 @@
+<ng-container *ngIf="planet$ | async as planet">
+    <pl-header [title]="planet.planetName">
+        <div class="header-actions" actions>
+            <button
+                class="btn btn--secondaryBtn"
+                (click)="openEditModal(planet)"
+            >
+                <span class="btn-label btn-label--primary">Edit</span>
+            </button>
+            <button class="btn btn--primary" (click)="openConfirmationModal()">
+                <span class="btn-label btn-label--plain">Delete</span>
+            </button>
+        </div>
+    </pl-header>
+
+    <div class="planet-wrapper">
+        <div class="planet-card planet-main-info">
+            <div class="data">
+                <div class="data__image data__image--details">
+                    <img
+                        *ngIf="planet.imageUrl; else placeholder"
+                        [src]="planet.imageUrl"
+                        [alt]="planet.planetName + ' planet'"
+                        loading="lazy"
+                    />
+                    <ng-template #placeholder>
+                        <div
+                            class="planet-placeholder planet-placeholder--details"
+                        ></div>
+                    </ng-template>
+                </div>
+                <div class="data__info data__info--details">
+                    <div
+                        class="data-primary-label data-primary-label--main-details"
+                    >
+                        {{ planet.planetName }}
+                    </div>
+                    <div
+                        class="data-secondary-label data-secondary-label--main-details"
+                    >
+                        {{ planet.description || "--" }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="planet-card planet-card--centered planet-radius">
+            <div class="data__info">
+                <div class="data-primary-label data-primary-label--details">
+                    {{ planet.planetRadiusKM }}
+                </div>
+                <div class="data-secondary-label data-secondary-label--details">
+                    Radius in km
+                </div>
+            </div>
+        </div>
+        <div class="planet-card planet-card--centered planet-color">
+            <div class="data__info">
+                <div class="data-primary-label data-primary-label--details">
+                    {{ planet.planetColor }}
+                </div>
+                <div class="data-secondary-label data-secondary-label--details">
+                    Color
+                </div>
+            </div>
+        </div>
+        <div class="planet-card planet-card--centered planet-distFromSun">
+            <div class="data__info">
+                <div class="data-primary-label data-primary-label--details">
+                    {{ planet.distInMillionsKM.fromSun }}
+                </div>
+                <div class="data-secondary-label data-secondary-label--details">
+                    Dist. from sun
+                </div>
+            </div>
+        </div>
+        <div class="planet-card planet-card--centered planet-distFromEarth">
+            <div class="data__info">
+                <div class="data-primary-label data-primary-label--details">
+                    {{ planet.distInMillionsKM.fromEarth }}
+                </div>
+                <div class="data-secondary-label data-secondary-label--details">
+                    Dist. from earth
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <pl-planet-form-modal
+        *ngIf="isEditModalVisible"
+        [mode]="'edit'"
+        [planet]="selectedPlanet"
+        (submitForm)="updatePlanet($event)"
+        (cancel)="closeEditModal()"
+    ></pl-planet-form-modal>
+
+    <pl-confirmation-modal
+        *ngIf="isConfirmationModalVisible"
+        [action]="'delete'"
+        [actionName]="'deleting'"
+        [name]="planet.planetName"
+        (confirmationEmitter)="deletePlanet(planet.id)"
+        (cancelEmitter)="isConfirmationModalVisible = false"
+    ></pl-confirmation-modal>
+</ng-container>

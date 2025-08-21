@@ -1,0 +1,251 @@
+@use "../standard/colors.scss";
+@use "../mixins/mixins.scss";
+
+.planet-list {
+    background-color: colors.$background;
+    padding: 4rem 0 4rem 4rem;
+    display: flex;
+    flex-direction: column;
+    height: calc(100% - 18rem);
+    &__header {
+        display: flex;
+        align-items: center;
+        background-color: colors.$plain;
+        height: 4rem;
+        width: calc(100% - 4.6rem);
+        padding: 1rem 2rem;
+        border-bottom: 0.1rem solid colors.$divider;
+        box-sizing: border-box;
+    }
+    &__content {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        background-color: colors.$plain;
+        width: 100%;
+        padding: 0.8rem 2rem;
+        border-bottom: 0.1rem solid colors.$divider;
+        box-sizing: border-box;
+        cursor: pointer;
+        &:last-child {
+            border-bottom: none;
+        }
+    }
+}
+
+.planet-list-content-wrapper {
+    overflow-y: auto;
+    padding-right: 4rem;
+}
+
+.header-label {
+    font-size: 1.2rem;
+    color: colors.$secondary-text;
+}
+
+.width {
+    @include mixins.width-modif() using($width) {
+        width: $width;
+    }
+}
+
+.data {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+
+    &__image {
+        min-width: 6rem;
+        min-height: 6rem;
+        width: 6rem;
+        height: 6rem;
+
+        &--details {
+            min-width: 18rem;
+            min-height: 18rem;
+            width: 18rem;
+            height: 18rem;
+        }
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+    }
+
+    &__info {
+        display: flex;
+        flex-direction: column;
+        gap: 0.4rem;
+
+        &--details {
+            gap: 2rem;
+        }
+    }
+}
+
+.data-primary-label {
+    font-size: 1.6rem;
+    color: colors.$primary-text;
+
+    &--main-details {
+        font-family: "SemiBold";
+        font-size: 3.6rem;
+        line-height: 4rem;
+    }
+
+    &--details {
+        font-family: "Medium";
+        font-size: 2.4rem;
+        line-height: 2.8rem;
+    }
+}
+
+.data-secondary-label {
+    font-size: 1.2rem;
+    color: colors.$secondary-text;
+
+    &--main-details {
+        font-size: 1.4rem;
+        max-height: 15rem;
+        overflow-y: auto;
+    }
+
+    &--details {
+        font-size: 1.2rem;
+    }
+}
+
+.overflow-label {
+    @include mixins.font-overflow();
+    margin-right: 2rem;
+
+    &--1 {
+        @include mixins.font-overflow($clamp: 1);
+        word-break: break-all;
+    }
+}
+
+.planet-placeholder {
+    background-color: colors.$primary;
+    width: 100%;
+    height: 100%;
+    min-height: 6rem;
+    border-radius: 50%;
+
+    &--details {
+        min-height: 18rem;
+    }
+
+    &--grid {
+        min-height: 8rem;
+        min-width: 8rem;
+    }
+}
+
+.planet-wrapper {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-column-gap: 2rem;
+    grid-row-gap: 2rem;
+    height: 27.2rem;
+    width: calc(100% - 8rem);
+    margin: 3.2rem 4rem;
+}
+
+.planet-main-info {
+    grid-area: 1 / 1 / 3 / 4;
+}
+.planet-radius {
+    grid-area: 1 / 4 / 2 / 6;
+}
+.planet-color {
+    grid-area: 2 / 4 / 3 / 6;
+}
+.planet-distFromSun {
+    grid-area: 1 / 6 / 2 / 7;
+}
+.planet-distFromEarth {
+    grid-area: 2 / 6 / 3 / 7;
+}
+
+.planet-card {
+    background-color: colors.$plain;
+    border-radius: 0.8rem;
+    padding: 4rem 4rem 5.2rem 4rem;
+
+    &--centered {
+        text-align: center;
+        padding: 3.2rem 0 0 0;
+    }
+}
+
+.planet-grid-wrapper {
+    background-color: #eceff4;
+    padding: 4rem 0 4rem 4rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    height: calc(100% - 18rem);
+    overflow-y: auto;
+}
+
+.planet-grid-card {
+    display: flex;
+    flex-direction: column;
+    gap: 3.2rem;
+    width: calc(20% - 2rem);
+    height: 51.5rem;
+    padding: 2.8rem 2rem;
+    background-color: colors.$plain;
+    border-radius: 0.4rem;
+    box-sizing: border-box;
+    cursor: pointer;
+    &__header {
+        display: flex;
+        flex-direction: column;
+        gap: 2.4rem;
+        align-items: center;
+        img {
+            min-width: 8rem;
+            min-height: 8rem;
+            max-width: 8rem;
+            max-height: 8rem;
+        }
+    }
+
+    &__description {
+        color: colors.$secondary-text;
+        font-size: 1.4rem;
+        @include mixins.font-overflow($clamp: 9);
+    }
+
+    &__footer {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        margin-top: auto;
+        .data-pair-wrapper {
+            display: flex;
+            justify-content: space-between;
+            .data-pair {
+                display: flex;
+                flex-direction: column;
+                gap: 0.4rem;
+                &__primary {
+                    font-family: "SemiBold";
+                    font-size: 1.6rem;
+                    line-height: 2rem;
+                }
+
+                &__secondary {
+                    font-size: 1.2rem;
+                    line-height: 2rem;
+                    color: colors.$secondary-text;
+                }
+            }
+        }
+    }
+}

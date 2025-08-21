@@ -1,0 +1,18 @@
+<div class="sort" (click)="toggleSort()">
+    <div class="icon icon--sort-asc">
+        <div
+            [ngClass]="{
+                'icon__color--primary': state === 'ascending',
+                'icon__color--secondaryText': state !== 'ascending'
+            }"
+        ></div>
+    </div>
+    <div class="icon icon--sort-desc">
+        <div
+            [ngClass]="{
+                'icon__color--primary': state === 'descending',
+                'icon__color--secondaryText': state !== 'descending'
+            }"
+        ></div>
+    </div>
+</div>

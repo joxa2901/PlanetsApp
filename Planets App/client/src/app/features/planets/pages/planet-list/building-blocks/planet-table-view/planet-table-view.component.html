@@ -1,0 +1,43 @@
+<div class="planet-list__content" [routerLink]="[planet.id]">
+    <div class="width--40">
+        <div class="data width--80">
+            <div class="data__image">
+                <img
+                    *ngIf="planet.imageUrl; else placeholder"
+                    [src]="planet.imageUrl"
+                    [alt]="planet.planetName + ' planet'"
+                    loading="lazy"
+                />
+                <ng-template #placeholder>
+                    <div class="planet-placeholder"></div>
+                </ng-template>
+            </div>
+            <div class="data__info">
+                <div
+                    class="data-primary-label"
+                    [innerHTML]="
+                        planet.planetName | highlight : searchControl.value
+                    "
+                ></div>
+                <div class="data-secondary-label overflow-label--1">
+                    {{ planet.description || "--" }}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div
+        class="width--15 data-primary-label"
+        [innerHTML]="
+            planet.planetColor || '--' | highlight : searchControl.value
+        "
+    ></div>
+    <div class="width--15 data-primary-label">
+        {{ planet.planetRadiusKM || "--" }}
+    </div>
+    <div class="width--15 data-primary-label">
+        {{ planet.distInMillionsKM.fromSun || "--" }}
+    </div>
+    <div class="width--15 data-primary-label">
+        {{ planet.distInMillionsKM.fromEarth || "--" }}
+    </div>
+</div>

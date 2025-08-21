@@ -1,0 +1,111 @@
+@use "../standard/colors.scss";
+@use "../mixins/mixins.scss";
+
+.search-bar {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .icon--search {
+        position: absolute;
+        left: 1.4rem;
+    }
+
+    input {
+        min-width: 24rem;
+        height: 4rem;
+        border: 0.1rem solid colors.$border;
+        padding-left: 3.4rem;
+        padding-right: 1.4rem;
+        border-radius: 0.4rem;
+        font-family: "Regular";
+        font-size: 1.4rem;
+        color: colors.$primary-text;
+        box-sizing: border-box;
+
+        &::placeholder {
+            font-family: "Regular";
+            font-size: 1.4rem;
+            color: colors.$placeholder;
+        }
+    }
+}
+
+input {
+    height: 4rem;
+    border: 0.1rem solid colors.$border;
+    border-radius: 0.4rem;
+    font-family: "Regular";
+    font-size: 1.4rem;
+    color: colors.$primary-text;
+    box-sizing: border-box;
+    padding: 1.4rem;
+}
+
+textarea {
+    width: 100%;
+    padding: 1.4rem;
+    border: 0.1rem solid colors.$border;
+    border-radius: 0.4rem;
+    resize: none;
+    font-family: "Regular";
+    font-size: 1.4rem;
+    color: colors.$primary-text;
+    box-sizing: border-box;
+    max-height: 40rem;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
+}
+
+.form-pair {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+
+    &__image {
+        flex-direction: row;
+        gap: unset;
+        justify-content: space-between;
+        align-items: center;
+    }
+}
+
+.form-label {
+    font-size: 1.2rem;
+    line-height: 2rem;
+
+    @include mixins.color-modif() using($color) {
+        color: $color;
+    }
+}
+
+.error {
+    position: absolute;
+    bottom: -1.5rem;
+    color: colors.$danger;
+}
+
+.required {
+    border-color: colors.$danger;
+}
+
+.btn {
+    input {
+        position: absolute;
+        width: 100%;
+        visibility: hidden;
+    }
+}
+
+.col {
+    width: 100%;
+}
+
+.col-50 {
+    width: 50%;
+}

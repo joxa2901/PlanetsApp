@@ -1,0 +1,33 @@
+@use "../mixins/mixins.scss";
+
+.icon {
+    &--search {
+        @include mixins.icon("search.svg", 1.2rem, 1.2rem);
+    }
+
+    &--grid-view {
+        @include mixins.icon("grid-view.svg", 1.2rem, 1.2rem);
+    }
+
+    &--list-view {
+        @include mixins.icon("list-view.svg", 1.2rem, 1.2rem);
+    }
+
+    &--sort-asc {
+        @include mixins.icon("sortAsc.svg", 0.8rem, 0.8rem);
+    }
+
+    &--sort-desc {
+        @include mixins.icon("sortDesc.svg", 0.8rem, 0.8rem);
+    }
+
+    &--confirmation {
+        @include mixins.icon("confirmationAlert.svg", 6rem, 6rem);
+    }
+
+    &__color {
+        @include mixins.color-modif() using($color) {
+            background-color: $color;
+        }
+    }
+}

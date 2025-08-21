@@ -1,0 +1,111 @@
+<pl-header [title]="'Planets'">
+    <div class="header-actions" actions>
+        <div class="toggle-view" *ngIf="isVisibleOnDesktopScreen">
+            <div
+                class="btn-icon-wrapper"
+                [class.btn-icon-wrapper--active]="toggleView === 'grid'"
+                (click)="toggleView = 'grid'"
+            >
+                <div class="icon icon--grid-view">
+                    <div class="icon__color--placeholder"></div>
+                </div>
+            </div>
+            <span class="divider"></span>
+            <div
+                class="btn-icon-wrapper"
+                [class.btn-icon-wrapper--active]="toggleView === 'list'"
+                (click)="toggleView = 'list'"
+            >
+                <div class="icon icon--list-view">
+                    <div class="icon__color--placeholder"></div>
+                </div>
+            </div>
+        </div>
+        <div class="search-bar">
+            <div class="icon icon--search" (click)="onSearchIconFocus()">
+                <div class="icon__color--placeholder"></div>
+            </div>
+            <input
+                #search
+                type="text"
+                [formControl]="searchControl"
+                [placeholder]="'Search...'"
+            />
+        </div>
+        <button class="btn btn--primary btn-mobile" (click)="openModal()">
+            <span class="btn-label btn-label--plain">
+                {{ isMobile ? "+" : "New Planet" }}</span
+            >
+        </button>
+    </div>
+</pl-header>
+<div class="planet-list" *ngIf="toggleView === 'list'">
+    <div class="planet-list__header">
+        <div class="width--40 sort-pair">
+            <div class="header-label">Name</div>
+            <pl-sort
+                sortKey="planetName"
+                (sortChange)="sortItems($event)"
+            ></pl-sort>
+        </div>
+        <div class="width--15 sort-pair">
+            <div class="header-label">Color</div>
+            <pl-sort
+                sortKey="planetColor"
+                (sortChange)="sortItems($event)"
+            ></pl-sort>
+        </div>
+        <div class="width--15 sort-pair">
+            <div class="header-label">Radius in km</div>
+            <pl-sort
+                sortKey="planetRadiusKM"
+                (sortChange)="sortItems($event)"
+            ></pl-sort>
+        </div>
+        <div class="width--15 sort-pair">
+            <div class="header-label">Dist. from Sun</div>
+            <pl-sort
+                sortKey="distInMillionsKM.fromSun"
+                (sortChange)="sortItems($event)"
+            ></pl-sort>
+        </div>
+        <div class="width--15 sort-pair">
+            <div class="header-label">Dist. from Earth</div>
+            <pl-sort
+                sortKey="distInMillionsKM.fromEarth"
+                (sortChange)="sortItems($event)"
+            ></pl-sort>
+        </div>
+    </div>
+    <div class="planet-list-content-wrapper">
+        <ng-container
+            *ngFor="let planet of planets$ | async; trackBy: trackByPlanetId"
+        >
+            <pl-planet-table-view
+                [planet]="planet"
+                [searchControl]="searchControl"
+                [id]="planet.id.toString()"
+            ></pl-planet-table-view>
+        </ng-container>
+        <div #lastElement></div>
+    </div>
+</div>
+
+<div class="planet-grid-wrapper" *ngIf="toggleView === 'grid'">
+    <ng-container
+        *ngFor="let planet of planets$ | async; trackBy: trackByPlanetId"
+    >
+        <pl-planet-grid-view
+            [planet]="planet"
+            class="planet-grid-card"
+            [routerLink]="[planet.id]"
+        ></pl-planet-grid-view>
+    </ng-container>
+</div>
+
+<pl-planet-form-modal
+    *ngIf="isCreateModalVisible"
+    [mode]="'create'"
+    (submitForm)="createPlanet($event)"
+    (cancel)="closeModal()"
+></pl-planet-form-modal>

@@ -1,0 +1,17 @@
+@use "colors";
+
+.layout {
+    width: 100vw;
+    height: 100vh;
+    background-color: colors.$background;
+}
+
+.relative {
+    position: relative;
+}
+
+.sort-pair {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
